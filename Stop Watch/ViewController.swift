@@ -17,9 +17,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        timer = Timer.scheduledTimer(withTimeInterval: 1/100, repeats: true, block: { (timer) in
-            self.update()
-        })
+//        timer = Timer.scheduledTimer(withTimeInterval: 1/100, repeats: true, block: { (timer) in
+//            self.update()
+//        })
     }
     
     func update() {
@@ -29,6 +29,21 @@ class ViewController: UIViewController {
         let msec = count - (min * 60 * 100) - (sec * 100)
         timeLabel.text = String(format: "%02d:%02d:%02d", min, sec, msec)
     }
-
+    @IBAction func startButton(_ sender: UIButton) {
+        timer = Timer.scheduledTimer(withTimeInterval: 1/100, repeats: true, block: { (timer) in
+            self.update()
+        })
+    }
+    @IBAction func resetButton(_ sender: UIButton) {
+        timer.invalidate()
+        count = 0
+        timeLabel.text = "00:00:00"
+        
+        
+    }
+    @IBAction func StopButton(_ sender: UIButton) {
+        timer.invalidate()
+    }
+    
 }
 
